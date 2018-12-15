@@ -1,0 +1,13 @@
+.idea
+.Library
+.Logs
+.obj
+.Packages
+.ProjectSettings
+.Temp
+*.csproj
+Assets/Plugins
+Assets/Scenes
+Assets/*.meta
+Assets/Scripts/*.meta
+Assets/Sprites/*.meta
