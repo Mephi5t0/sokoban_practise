@@ -2,9 +2,16 @@
 
 public class Game : MonoBehaviour
 {
-    public Player player;
+    public LevelBuilder LevelBuilder;
+    private Player player;
     private bool isReadyForInput;
 
+    void Start()
+    {
+        LevelBuilder.Build();
+        player = FindObjectOfType<Player>();
+    }
+    
     void Update()
     {
         var moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));

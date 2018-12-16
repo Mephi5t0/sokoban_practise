@@ -30,13 +30,10 @@ public class Box : MonoBehaviour
         }
 
         var boxes = GameObject.FindGameObjectsWithTag("Box");
-        foreach (var box in boxes)
+        if (boxes.Any(box => Math.Abs(box.transform.position.x - newPosition.x) < TOLERANCE 
+                             && Math.Abs(box.transform.position.y - newPosition.y) < TOLERANCE))
         {
-            if (Math.Abs(box.transform.position.x - newPosition.x) < TOLERANCE 
-                && Math.Abs(box.transform.position.y - newPosition.y) < TOLERANCE)
-            {
-                return true;
-            }
+            return true;
         }
 
         return false;
