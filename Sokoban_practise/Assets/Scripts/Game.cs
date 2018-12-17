@@ -10,6 +10,13 @@ public class Game : MonoBehaviour
     private Player player;
     private bool isReadyForInput;
 
+    public void Play()
+    {
+        SceneManager.UnloadSceneAsync("Menu");
+        Resources.UnloadUnusedAssets();
+        Start();
+    }
+    
     void Start()
     {
         NextButton.SetActive(false) ;
@@ -26,7 +33,10 @@ public class Game : MonoBehaviour
             if (isReadyForInput)
             {
                 isReadyForInput = false;
-                player.Move(moveInput);
+                if (player.Move(moveInput))
+                {
+                    ScoreScript.MovementsCount++;
+                }
                 NextButton.SetActive(IsLevelComplete());
             }
         }
@@ -56,7 +66,7 @@ public class Game : MonoBehaviour
             Debug.Log("Unload Done");
             Resources.UnloadUnusedAssets();
         }
-
+        
         var asyncLoad = SceneManager.LoadSceneAsync("LevelScene", LoadSceneMode.Additive);
         while (!asyncLoad.isDone)
         {
@@ -68,6 +78,7 @@ public class Game : MonoBehaviour
         LevelBuilder.Build();
         player = FindObjectOfType<Player>();
         Debug.Log("Level loaded");
+        ScoreScript.MovementsCount = 0;
     }
     
     public void NextLevel()

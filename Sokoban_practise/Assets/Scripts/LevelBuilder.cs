@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 [System.Serializable]
@@ -13,6 +14,7 @@ public class LevelBuilder : MonoBehaviour
     public int CurrentLevelNumber;
     public List<LevelElement> LevelElements;
     private Level currentLevel;
+    private const int MAGIC = 3;
 
     GameObject GetPrefab(char sym)
     {
@@ -34,7 +36,7 @@ public class LevelBuilder : MonoBehaviour
     {
         currentLevel = GetComponent<Levels>().levels[CurrentLevelNumber];
 
-        var startX = -currentLevel.Width / 2;
+        var startX = -currentLevel.Width / 2 + MAGIC;
         var x = startX;
         var y = -currentLevel.Height / 2;
         
